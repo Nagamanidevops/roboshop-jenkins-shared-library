@@ -1,5 +1,5 @@
-
-pipeline {
+def call() {
+  pipeline {
 
     agent {
       label 'workstation'
@@ -37,3 +37,6 @@ pipeline {
   }
 }
 
+
+
+}
