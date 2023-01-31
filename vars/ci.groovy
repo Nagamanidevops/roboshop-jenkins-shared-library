@@ -11,7 +11,7 @@ def call() {
         steps {
           script
           {
-            common.compile()
+            common.compile
           }
         }
       }
