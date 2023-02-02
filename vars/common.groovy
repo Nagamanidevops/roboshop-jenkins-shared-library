@@ -1,4 +1,5 @@
 def compile() {
+    
 
     if ( app_lang == "nodejs" ) {
         sh 'npm install'
@@ -12,14 +13,8 @@ def compile() {
 def unittest(){
      if ( app_lang == "nodejs" ) {
          
-         try {
-    sh 'npm test'
-       } catch(Exception e) {
-          email("email to some one")
-        }
-        
-      
-    }
+            sh 'npm test'
+         }
     
     if ( app_lang == "maven" ) {
         sh 'mvn test || true'
