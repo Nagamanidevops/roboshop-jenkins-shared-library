@@ -15,7 +15,7 @@ def unittest(){
          try {
     sh 'npm test'
        } catch(Exception e) {
-          common.email("email to some one")
+          email("email to some one")
         }
         
       
