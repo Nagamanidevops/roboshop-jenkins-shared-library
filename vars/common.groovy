@@ -32,7 +32,7 @@ def unittest(){
     
 }
 def email(echo_note){
-   sh  ${'echo_note'}
+   println echo_note
     
 }
 
