@@ -11,7 +11,13 @@ def compile() {
 
 def unittest(){
      if ( app_lang == "nodejs" ) {
-        sh 'npm test || true'
+         
+         try {
+    sh 'npm test'
+       } catch(Exception e) {
+          common.email("email to some one")
+        }
+        
       
     }
     
@@ -23,6 +29,10 @@ def unittest(){
     }
     
    
+    
+}
+def email(echo_note){
+   sh  ${'echo_note'}
     
 }
 
