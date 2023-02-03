@@ -22,6 +22,7 @@ def call() {
                     script
                     {
                         common.unittest()
+                        sh env 
                     }
                 }
             }
