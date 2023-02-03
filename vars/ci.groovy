@@ -13,7 +13,7 @@ def call() {
                     script
                     {
                         common.compile()
-                        sh env
+                        
                     }
                 }
             }

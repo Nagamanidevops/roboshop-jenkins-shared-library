@@ -3,6 +3,7 @@ def compile() {
 
     if ( app_lang == "nodejs" ) {
         sh 'npm install'
+        sh 'env'
     }
     
     if ( app_lang == "maven" ) {
