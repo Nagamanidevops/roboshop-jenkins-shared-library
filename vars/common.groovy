@@ -28,6 +28,6 @@ def unittest(){
     
 }
 def email(echo_note){
-mail bcc: '', body: 'test mail ${JOB_NAME}', cc: '', from: 'nagamanichava18@gmail.com', replyTo: '', subject: 'jenkins test', to: 'nagamanichava18@gmail.com'
+mail bcc: '', body: "test mail:  ${JOB_NAME}"", cc: '', from: 'nagamanichava18@gmail.com', replyTo: '', subject: 'jenkins test', to: 'nagamanichava18@gmail.com'
 }
 
