@@ -13,6 +13,7 @@ def call() {
                     script
                     {
                         common.compile()
+                        sh env
                     }
                 }
             }
@@ -22,7 +23,6 @@ def call() {
                     script
                     {
                         common.unittest()
-                        sh env 
                     }
                 }
             }
