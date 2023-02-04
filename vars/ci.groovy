@@ -12,7 +12,7 @@ def call() {
       }
 
       stage('Unit Tests') {
-        common.unittests()
+        common.unittest()
       }
 
       stage('Quality Control') {
