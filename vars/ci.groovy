@@ -1,5 +1,5 @@
 def call() {
-  if(!SONAR_EXTRA_OPTS)
+  if( !env.SONAR_EXTRA_OPTS )
   {
     SONAR_EXTRA_OPTS = " "
   }
