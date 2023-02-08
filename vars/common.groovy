@@ -37,7 +37,7 @@ def artifactpush()
     
     
     if ( app_lang == "nodejs" ) {
-      zip -r cart-${TAG_NAME}.zip node_module server.js
+      sh "zip -r cart-${TAG_NAME}.zip node_module server.js"
     }
     sh 'ls -l'
 }
