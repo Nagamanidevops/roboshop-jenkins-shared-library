@@ -32,3 +32,13 @@ mail bcc: '', body: "Job Failed - ${JOB_BASE_NAME}\nJenkins URL - ${JOB_URL}", c
 
 }
 
+def artifactpush()
+{
+    
+    
+    if ( app_lang == "nodejs" ) {
+      zip -r cart-${TAG_NAME}.zip node_module server.js
+    }
+    sh 'ls -l'
+}
+

@@ -37,12 +37,10 @@ def call() {
         }
       }
 
-      stage('Upload Code to Centralized Place') {
-        echo 'Upload'
-      }
       
       if(env.PUSH_CODE == "true") {
         stage('Upload Code to Centralized Place') {
+          common.artifactpush()
          
         }
       }
