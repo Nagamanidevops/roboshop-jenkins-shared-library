@@ -43,13 +43,14 @@ def artifactpush()
      if ( app_lang == "nginx" || app_lang == "python" ) {
       
        sh "zip -r ${component}-${TAG_NAME}.zip * -x jenkinsfile"
+       
     }
     
       if ( app_lang == "maven" ) {
       
 
        //sh "zip -r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION {$extrafiles}"
-       sh "zip r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION ${extrafiles}"
+       sh "zip -r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION ${extrafiles}"
     }
     
     NEXUS_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names nexus.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
