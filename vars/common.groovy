@@ -40,6 +40,11 @@ def artifactpush()
       sh "zip -r ${component}-${TAG_NAME}.zip node_module server.js VERSION ${extrafiles}"
     }
     
+     if ( app_lang == "nginx" ) {
+      sh "zip -r ${component}-${TAG_NAME}.zip *"
+       sh "zip -r ${component}-${TAG_NAME}.zip * -x jenkinsfile"
+    }
+    
     NEXUS_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names nexus.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         NEXUS_USER = sh ( script: 'aws ssm get-parameters --region us-east-1 --names nexus.user  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${NEXUS_PASS}", var: 'SECRET']]]) {
