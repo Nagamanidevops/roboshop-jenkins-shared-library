@@ -40,7 +40,7 @@ def artifactpush()
       sh "zip -r ${component}-${TAG_NAME}.zip node_module server.js VERSION ${extrafiles}"
     }
     
-     if ( app_lang == "nginx" ) {
+     if ( app_lang == "nginx" || app_lang == "python" ) {
       
        sh "zip -r ${component}-${TAG_NAME}.zip * -x jenkinsfile"
     }
