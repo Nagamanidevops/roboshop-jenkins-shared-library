@@ -34,10 +34,10 @@ mail bcc: '', body: "Job Failed - ${JOB_BASE_NAME}\nJenkins URL - ${JOB_URL}", c
 
 def artifactpush()
 {
-    sh "echo ${TAG_NAME} >version"
+    sh "echo ${TAG_NAME} >VERSION"
     
     if ( app_lang == "nodejs" ) {
-      sh "zip -r ${component}-${TAG_NAME}.zip node_module server.js"
+      sh "zip -r ${component}-${TAG_NAME}.zip node_module server.js VERSION ${extrafiles}"
     }
     
     NEXUS_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names nexus.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
