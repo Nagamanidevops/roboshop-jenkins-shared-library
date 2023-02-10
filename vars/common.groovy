@@ -7,7 +7,8 @@ def compile() {
     }
     
     if ( app_lang == "maven" ) {
-        sh "mvn package &&  cp target/${component}-1.0.jar ${component}.jar"
+        //sh "mvn package &&  cp target/${component}-1.0.jar ${component}.jar"
+        sh "mvn clean compile"
     }
 }
 
@@ -18,10 +19,10 @@ def unittest(){
          }
     
     if ( app_lang == "maven" ) {
-        sh 'mvn test || true'
+        sh 'mvn test'
     }
        if ( app_lang == "python" ) {
-        sh 'python3 -m unittest || true'
+        sh 'python3 -m unittest'
     }
     
    
@@ -42,7 +43,8 @@ def artifactpush()
     
      if ( app_lang == "nginx" || app_lang == "python" ) {
       
-       sh "zip -r ${component}-${TAG_NAME}.zip * -x jenkinsfile"
+      // sh "zip -r ${component}-${TAG_NAME}.zip * -x jenkinsfile"
+      	 sh "zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile ${extraFiles}"
        
     }
     
