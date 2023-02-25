@@ -25,7 +25,7 @@ def call() {
         }
       }
       
-      stage('Terraform Apply') {
+      stage('Terraform apply') {
         steps {
           sh "terraform ${ACTION} -auto-approve -var-file=env-${INFRA_ENV}/main.tfvars"
         }
