@@ -39,14 +39,17 @@ def call() {
          echo 'sonar scanner'
         }
       }
-
-
-      if(env.PUSH_CODE == "true") {
-        stage('Upload Code to Centralized Place') {
+      
+       stage('Upload Code to Centralized Place') {
           common.artifactpush()
 
-        }
-      }
+
+      // if(env.PUSH_CODE == "true") {
+      //   stage('Upload Code to Centralized Place') {
+      //     common.artifactpush()
+
+      //   }
+      // }
 
 
 
