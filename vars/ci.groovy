@@ -8,11 +8,11 @@ def call() {
     env.extrafiles = " "
   }
 
-  //   if(!env.TAG_NAME) {
-  //   env.PUSH_CODE = "false"
-  // } else {
-  //   env.PUSH_CODE = "true"
-  // }
+    if(!env.TAG_NAME) {
+    env.PUSH_CODE = "false"
+  } else {
+    env.PUSH_CODE = "true"
+  }
 
   try {
     node('workstation') {
@@ -40,23 +40,26 @@ def call() {
         }
       }
       
-      stage('Upload Code to Centralized Place') {
-        echo "hi"
-          common.artifactpush()
+    
+      if (app_lang == "maven") {
+        stage('Build Package') {
+          sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
+        }
+      }
+
+      if(env.PUSH_CODE == "true") {
+        stage('Upload Code to Centralized Place') {
+          common.artifactPush()
+        }
       }
 
 
-      // if(env.PUSH_CODE == "true") {
-      //   stage('Upload Code to Centralized Place') {
-      //     common.artifactpush()
+    }
 
-      //   }
-      // }
-
-
+  } catch(Exception e) {
+    common.email("Failed")
+  }
 }
-
-   
 
     } catch(Exception e) {
     common.email("Failed")
