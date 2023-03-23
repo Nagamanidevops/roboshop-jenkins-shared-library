@@ -40,17 +40,15 @@ def call() {
         }
       }
       
-      // stage('Upload Code to Centralized Place') {
+      
+
+
+      // if(env.PUSH_CODE == "true") {
+      //   stage('Upload Code to Centralized Place') {
       //     common.artifactpush()
+
+      //   }
       // }
-
-
-      if(env.PUSH_CODE == "true") {
-        stage('Upload Code to Centralized Place') {
-          common.artifactpush()
-
-        }
-      }
 
 
 }
