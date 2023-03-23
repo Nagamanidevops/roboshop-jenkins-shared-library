@@ -41,6 +41,7 @@ def call() {
       }
       
       stage('Upload Code to Centralized Place') {
+        echo "hi"
           common.artifactpush()
       }
 
