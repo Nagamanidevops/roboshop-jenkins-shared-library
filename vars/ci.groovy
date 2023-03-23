@@ -40,23 +40,24 @@ def call() {
         }
       }
       
-       stage('Upload Code to Centralized Place') {
-          common.artifactpush()
-
-
-      // if(env.PUSH_CODE == "true") {
-      //   stage('Upload Code to Centralized Place') {
+      // stage('Upload Code to Centralized Place') {
       //     common.artifactpush()
-
-      //   }
       // }
 
 
+      if(env.PUSH_CODE == "true") {
+        stage('Upload Code to Centralized Place') {
+          common.artifactpush()
+
+        }
+      }
 
 
-    }
+}
 
-  } catch(Exception e) {
+   
+
+    } catch(Exception e) {
     common.email("Failed")
   }
 }
