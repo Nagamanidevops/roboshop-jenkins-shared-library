@@ -8,11 +8,11 @@ def call() {
     env.extrafiles = " "
   }
 
-    if(!env.TAG_NAME) {
-    env.PUSH_CODE = "false"
-  } else {
-    env.PUSH_CODE = "true"
-  }
+  //   if(!env.TAG_NAME) {
+  //   env.PUSH_CODE = "false"
+  // } else {
+  //   env.PUSH_CODE = "true"
+  // }
 
   try {
     node('workstation') {
@@ -31,7 +31,7 @@ def call() {
         common.unittest()
       }
 
-      stage('Quality Control') {
+      stage('Quality Controlll') {
         SONAR_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names sonarqube.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         SONAR_USER = sh ( script: 'aws ssm get-parameters --region us-east-1 --names sonarqube.user  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
         wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${SONAR_PASS}", var: 'SECRET']]]) {
