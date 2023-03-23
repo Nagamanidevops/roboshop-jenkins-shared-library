@@ -1,3 +1,54 @@
+// def call() {
+//   try {
+//     pipeline {
+
+//       agent {
+//         label 'workstation'
+//       }
+
+//       stages {
+
+//         stage('Compile/Build') {
+//           steps {
+//             script {
+//               common.compile()
+
+//             }
+//           }
+//         }
+
+//         stage('Unit Tests') {
+//           steps {
+//             script {
+//               common.unittest()
+//             }
+//           }
+//         }
+
+//         stage('Quality Control') {
+//           environment {
+//             SONAR_USER = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.user  --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
+//             SONAR_PASS = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
+//           }
+//           steps {
+
+//           // sh "sonar-scanner -Dsonar.host.url=http://172.31.1.253:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectKey=cart"
+//           }
+//         }
+
+//         stage('Upload Code to Centralized Place') {
+//           steps {
+//             echo 'Upload'
+//           }
+//         }
+
+//       }
+
+//     }
+//   } catch (Exception e) {
+//     common.email("failed")
+//   }
+// }
 def call() {
   try {
     pipeline {
@@ -12,7 +63,6 @@ def call() {
           steps {
             script {
               common.compile()
-
             }
           }
         }
@@ -20,7 +70,7 @@ def call() {
         stage('Unit Tests') {
           steps {
             script {
-              common.unittest()
+              common.unittests()
             }
           }
         }
@@ -28,11 +78,15 @@ def call() {
         stage('Quality Control') {
           environment {
             SONAR_USER = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.user  --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
-            SONAR_PASS = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
+            //SONAR_PASS = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\')'
           }
           steps {
-
-           // sh "sonar-scanner -Dsonar.host.url=http://172.31.1.253:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectKey=cart"
+            script {
+              SONAR_PASS = sh ( script: 'aws ssm get-parameters --region us-east-1 --names sonarqube.pass  --with-decryption --query Parameters[0].Value | sed \'s/"//g\'', returnStdout: true).trim()
+              wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: "${SONAR_PASS}", var: 'SECRET']]]) {
+               // sh "sonar-scanner -Dsonar.host.url=http://172.31.11.33:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectKey=cart"
+              }
+            }
           }
         }
 
@@ -42,10 +96,11 @@ def call() {
           }
         }
 
+
       }
 
     }
-  } catch (Exception e) {
-    common.email("failed")
+  } catch(Exception e) {
+    common.email("Failed")
   }
 }
