@@ -102,14 +102,7 @@ def call() {
           sh "echo Sonar Scan"
         }
       }
-      stage('upload code to cp'){
-        
-        steps{
-          sh 'upload'
-        }
-      }
       
-
       if(env.PUSH_CODE == "true") {
         stage('Upload Code to Centralized Place') {
           common.artifactPush()
