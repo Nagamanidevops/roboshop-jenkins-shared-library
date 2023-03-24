@@ -92,9 +92,9 @@ def unittests() {
   }
 }
 
-def email(email_note) {
-  mail bcc: '', body: "Job Failed - ${JOB_BASE_NAME}\nJenkins URL - ${JOB_URL}", cc: '', from: 'nagamanichava18@gmail.com', replyTo: '', subject: "Jenkins Job Failed - ${JOB_BASE_NAME}", to: 'nagamanichava18t@gmail.com'
-}
+// def email(email_note) {
+//   mail bcc: '', body: "Job Failed - ${JOB_BASE_NAME}\nJenkins URL - ${JOB_URL}", cc: '', from: 'nagamanichava18@gmail.com', replyTo: '', subject: "Jenkins Job Failed - ${JOB_BASE_NAME}", to: 'nagamanichava18t@gmail.com'
+// }
 
 def artifactPush() {
   sh "echo ${TAG_NAME} >VERSION"
