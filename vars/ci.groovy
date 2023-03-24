@@ -103,6 +103,7 @@ def call() {
         }
       }
        stage('Upload Code to Centralized Place') {
+            common.artifactPush()
        }
       
       // if(env.PUSH_CODE == "true") {
