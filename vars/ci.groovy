@@ -105,7 +105,7 @@ def call() {
       stage('upload code to cp'){
         
         steps{
-          echo 'upload'
+          sh 'upload'
         }
       }
       
