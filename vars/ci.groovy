@@ -101,13 +101,14 @@ def call() {
           //sh "sonar-scanner -Dsonar.host.url=http://172.31.11.33:9000 -Dsonar.login=${SONAR_USER} -Dsonar.password=${SONAR_PASS} -Dsonar.projectKey=${component} -Dsonar.qualitygate.wait=true ${SONAR_EXTRA_OPTS}"
           sh "echo Sonar Scan"
         }
+}
 
 
-// if (app_lang == "maven") {
-//         stage('Build Package') {
-//           sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
-//         }
-//       }
+      if (app_lang == "maven") {
+        stage('Build Package') {
+          sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
+        }
+      }
 
       if(env.PUSH_CODE == "true") {
         stage('Upload Code to Centralized Place') {
@@ -118,8 +119,7 @@ def call() {
 
     }
 
-  catch(Exception e) {
-    //common.email("Failed")
+  } catch(Exception e) {
+    common.email("Failed")
   }
 }
-
