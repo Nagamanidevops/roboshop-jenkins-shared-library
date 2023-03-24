@@ -103,7 +103,7 @@ def call() {
         }
       }
        stage('Upload Code to Centralized Place') {
-            common.artifactPush()
+            common.artifactPush() 
        }
       
       // if(env.PUSH_CODE == "true") {
@@ -112,11 +112,10 @@ def call() {
       //   }
       // }
 
-
     }
 
   }
   catch(Exception e) {
-    common.email("Failed")
+   // common.email("Failed")
   }
 }
