@@ -16,7 +16,7 @@ def call() {
     }
     
      environment {
-      SSH=credentials('ssh')
+      SSH=credentials('SSH')
     }
       
     stages {
