@@ -15,9 +15,9 @@ def call() {
       ansiColor('xterm')
     }
     
-     environment {
-      SSH=credentials('SSH')
-    }
+    // environment {
+    //   SSH=credentials('ssh')
+    // }
       
     stages {
       
